@@ -147,7 +147,7 @@
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/02_90/val_set.txt"
+			    "set_file": "10_linear_0-9/02_090/val_set.txt"
 			}
 		    }
 		}
