@@ -1,0 +1,254 @@
+{
+	"common": {
+	    "fit_parameters": {
+		"epochs": 120,
+		"workers": 4,
+		"use_multiprocessing": false
+	    },
+	    "evaluator": {
+		"name": "Evaluator",
+		"configuration": {}
+	    },
+	    "displayer": {
+		"name": "Displayer",
+		"configuration": {}
+	    },
+	    "experiment_name": "DeepMotion3D_MD",
+	    "weights": null,
+	    "network": {
+		"name": "DeepMotion3D_MD",
+		"configuration": {
+		    "use_bias": true
+		}
+	    },
+	    "generator": {
+		"train": {
+		    "configuration": {
+			"batch_size": 32,
+			"convertion": "polar"
+		    },
+		    "name": "GeneratorMV"
+		},
+		"validation": {
+		    "configuration": {
+			"batch_size": 32,
+			"convertion": "polar"
+		    },
+		    "name": "GeneratorMV"
+		},
+		"test": {
+		    "configuration": {
+			"batch_size": 32,
+			"shuffle": false,
+			"convertion": "polar"
+		    },
+		    "name": "GeneratorMV"
+		}
+	    },
+	    "steps_per_epochs": null,
+	    "validation_steps": null,
+	    "optimizer": {
+		"name": "Adam",
+		"configuration": {}
+	    },
+	    "loss": {
+		"name": "MeanSquaredError",
+		"configuration": {}
+	    },
+	    "metrics": [
+		"mae"
+	    ],
+	    "callbacks": {
+		"runtime": [
+		    {
+			"name": "ModelCheckpoint"
+		    },
+		    {
+			"name": "TensorBoard",
+			"configuration": {
+			    "histogram_freq": 1,
+			    "write_graph": true,
+			    "profile_batch": 0
+			}
+		    }
+		],
+		"static": [
+		    {
+			"name": "TerminateOnNaN",
+			"configuration": {}
+		    },
+		    {
+			"name": "EarlyStopping",
+			"configuration": {
+			    "patience": 5,
+			    "min_delta": 0.01
+			}
+		    }
+		]
+	    }
+	},
+	"finetuning": [],
+	"experiment_variables": [
+	    {
+		"sub_experiment_name": "base",
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "normalize": {
+				"T": {
+				    "mean": 0,
+				    "std": 1
+				},
+				"Q": {
+				    "mean": 0,
+				    "std": 1
+				}
+			    }
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "normalize": {
+				"T": {
+				    "mean": 0,
+				    "std": 1
+				},
+				"Q": {
+				    "mean": 0,
+				    "std": 1
+				}
+			    }
+			}
+		    },
+		    "test": {
+			"configuration": {
+			    "normalize": {
+				"T": {
+				    "mean": 0,
+				    "std": 1
+				},
+				"Q": {
+				    "mean": 0,
+				    "std": 1
+				}
+			    }
+			}
+		    }
+		}
+	    }
+	],
+	"dataset": [
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/01_000/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/01_000/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/02_090/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/02_090/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/03_180/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/03_180/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/04_270/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/04_270/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/05_045/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/05_045/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/06_135/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/06_135/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/07_225/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/07_225/val_set.txt"
+			}
+		    }
+		}
+	    },
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/08_315/train_set.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/08_315/val_set.txt"
+			}
+		    }
+		}
+	    }
+	]
+    }
