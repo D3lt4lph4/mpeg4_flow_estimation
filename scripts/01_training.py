@@ -26,12 +26,13 @@ parser = argparse.ArgumentParser(
     description="Starts a training given a configuration file.")
 parser.add_argument('configuration',
                     help="The json configuration file to use for the training.")
+parser.add_argument('-r', '--repeat', help="The number of time the experiment should be run.", default=1, type=int)
 parser.set_defaults(feature=True)
 
 args = parser.parse_args()
 
 # Load the configuration file into the factory
-configuration_factory = TrainingConfigurationFactory(args.configuration)
+configuration_factory = TrainingConfigurationFactory(args.configuration, args.repeat)
 
 experiment_name = "_".join(
     splitext(basename(args.configuration))[0].split("_")[1:])
