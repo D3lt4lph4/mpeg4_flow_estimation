@@ -1,5 +1,7 @@
 import json
 
+from typing import Dict
+
 from os.path import join
 
 from copy import deepcopy
@@ -9,7 +11,7 @@ from tensorflow.keras import losses as keras_losses
 from tensorflow.keras import backend as K
 from tensorflow.keras import backend as K_2
 
-from flow_estimation import networks, generators
+from flow_estimation import networks, generators, displayers
 
 possible_losses = [keras_losses]
 
@@ -138,3 +140,35 @@ class TrainingConfiguration(object):
 
         with open(save_file_path, 'w') as fp:
             json.dump(self.config_dict, fp)
+
+
+
+class DisplayConfiguration(object):
+    def __init__(self, config_dict : Dict, disable: bool=True):
+        """ Configuration class to load objects required for display.
+
+        # Arguments:
+            - config_dict: The dictionnary extracted by a factory object.
+            - disable: Whether the loading display for the various objects to be generated should be enabled or not.
+        """
+        # Creating the displayer
+        network_configuration = config_dict["displayer"]["configuration"]
+
+        self.displayer = getattr(
+            displayers, config_dict["displayer"]["name"])(**network_configuration)
+
+        # Creating the network
+        network_configuration = config_dict["network"]["configuration"]
+        network_configuration["mode"] = "display"
+
+        self.network = getattr(
+            networks, config_dict["network"]["name"])(**network_configuration)
+
+        # Creating the generator
+        generator_configuration = config_dict["generator"][
+            "test"]["configuration"]
+
+        self.test_generator = getattr(
+            generators,
+            config_dict["generator"]["test"]["name"])(
+                **generator_configuration)

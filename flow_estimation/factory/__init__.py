@@ -1,3 +1,3 @@
-from .config import TrainingConfiguration
+from .config import TrainingConfiguration, DisplayConfiguration
 
 from .factory import TrainingConfigurationFactory
