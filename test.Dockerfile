@@ -7,6 +7,6 @@ WORKDIR /app
 
 RUN apt-get update && apt-get install -y ffmpeg libsm6 libxext6
 
-RUN pip install --upgrade pip && pip install tqdm opencv-python
+RUN pip install --upgrade pip && pip install tqdm opencv-python scikit-learn matplotlib
 
-ENTRYPOINT [ "python" , "scripts/01_training.py" ]
+ENTRYPOINT [ "python" , "scripts/02_testing.py" ]

@@ -1,1 +1,1 @@
-from .networks import DeepMotionCLS_MD
+from .networks import DeepMotionCLS_MD, DeepMotion3D_MD

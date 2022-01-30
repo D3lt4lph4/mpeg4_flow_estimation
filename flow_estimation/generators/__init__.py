@@ -1,1 +1,3 @@
-from .mv_generators import GeneratorMVSecond
+from .mv_generators import GeneratorMVSecond, GeneratorMV
+
+from .base_generators import BaseGenerator

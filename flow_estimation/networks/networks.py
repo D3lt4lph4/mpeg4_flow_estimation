@@ -42,3 +42,31 @@ def DeepMotionCLS_MD(shape: Tuple = (20, 25, 13, 13, 2),
               name="predictions")(x)
 
     return Model(input, x)
+
+def DeepMotion3D_MD(shape: Tuple = (13, 13, 500, 2),
+                   classes=1,
+                   use_bias=True,
+                   mode="training"):
+    """  Model based on the usage of 3D convolutions. Designed for the Moving Digit shaped inputs (200, 200).
+
+    # Argument:
+        - shape: The input shape.
+        - classes: The number of output classes.
+        - use_bias: If the network should use biases for all the layers.
+        - mode: If the model should be set for training or inference (not used here).
+    """
+
+    input = Input(shape=shape, name="data_input")
+
+    x = Conv3D(64, 3, 2, use_bias=use_bias, activation="relu")(input)
+    x = Conv3D(64, 3, 2, use_bias=use_bias, activation="relu")(x)
+
+    x = AveragePooling3D((2, 2, 2))(x)
+    x = Flatten()(x)
+    x = Dense(64, activation="relu", name="latent_output")(x)
+    x = Dense(classes,
+              activation="relu",
+              use_bias=use_bias,
+              name="predictions")(x)
+
+    return Model(input, x)
