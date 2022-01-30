@@ -2,8 +2,33 @@ from typing import Tuple
 
 
 from tensorflow.keras import Model
-from tensorflow.keras.layers import Conv3D, TimeDistributed, Input, Dense, Flatten, ConvLSTM2D, AveragePooling3D, Reshape
+from tensorflow.keras.layers import Conv2D, Conv3D, TimeDistributed, Input, Dense, Flatten, ConvLSTM2D, AveragePooling3D, Reshape
 
+def DeepMotionCLF_MD(shape: Tuple = (500, 13, 13, 2),
+                     classes=1,
+                     use_bias=True,
+                     mode: str = "training"):
+    """ Simple LSTM model. In this version, no average pooling is used and shape is reduced by convolutions.
+
+    # Argument:
+        - shape: The input shape.
+        - classes: The number of output classes.
+        - use_bias: If the network should use bias for all the layers.
+    """
+    input = Input(shape=shape, name="data_input")
+
+    first_convolution = Conv2D(32, 3, 2, use_bias=use_bias, activation="relu")
+    second_convolution = Conv2D(32, 3, 2, use_bias=use_bias, activation="relu")
+
+    x = TimeDistributed(first_convolution)(input)
+    x = TimeDistributed(second_convolution)(x)
+
+    x = ConvLSTM2D(32, 2, use_bias=use_bias)(x)
+    x = Flatten()(x)
+    x = Dense(64, activation="relu", name="latent_output")(x)
+    x = Dense(classes, activation="relu", use_bias=use_bias, name="predictions")(x)
+
+    return Model(input, x)
 
 def DeepMotionCLS_MD(shape: Tuple = (20, 25, 13, 13, 2),
                         classes: int = 1,
