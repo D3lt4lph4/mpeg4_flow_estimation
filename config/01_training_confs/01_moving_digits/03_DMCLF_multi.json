@@ -28,7 +28,7 @@
                     "transpose": [2,0,1,3],
                     "convertion": "polar"
                 },
-                "name": "QTVGeneratorMV"
+                "name": "GeneratorMV"
             },
             "validation": {
                 "configuration": {
@@ -36,7 +36,7 @@
                     "transpose": [2,0,1,3],
                     "convertion": "polar"
                 },
-                "name": "QTVGeneratorMV"
+                "name": "GeneratorMV"
             },
             "test": {
                 "configuration": {
@@ -45,7 +45,7 @@
                     "shuffle": false,
                     "convertion": "polar"
                 },
-                "name": "QTVGeneratorMV"
+                "name": "GeneratorMV"
             }
         },
         "steps_per_epochs": null,
@@ -83,7 +83,8 @@
                 {
                     "name": "EarlyStopping",
                     "configuration": {
-                        "patience": 10
+                        "patience": 5,
+                        "min_delta": 5
                     }
                 }
             ]
@@ -103,7 +104,7 @@
                             },
                             "Q": {
                                 "mean": 0,
-                                "std": 20
+                                "std": 1
                             }
                         }
                     }
@@ -117,7 +118,7 @@
                             },
                             "Q": {
                                 "mean": 0,
-                                "std": 20
+                                "std": 1
                             }
                         }
                     }
@@ -131,7 +132,7 @@
                             },
                             "Q": {
                                 "mean": 0,
-                                "std": 20
+                                "std": 1
                             }
                         }
                     }
