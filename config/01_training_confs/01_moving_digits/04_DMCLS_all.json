@@ -13,10 +13,10 @@
 		"name": "Displayer",
 		"configuration": {}
 	    },
-	    "experiment_name": "DeepMotion3D_MD",
+	    "experiment_name": "DeepMotionCLS_MD",
 	    "weights": null,
 	    "network": {
-		"name": "DeepMotion3D_MD",
+		"name": "DeepMotionCLS_MD",
 		"configuration": {
 		    "use_bias": true
 		}
@@ -27,14 +27,14 @@
 			"batch_size": 32,
 			"convertion": "polar"
 		    },
-		    "name": "GeneratorMV"
+		    "name": "GeneratorMVSecond"
 		},
 		"validation": {
 		    "configuration": {
 			"batch_size": 32,
 			"convertion": "polar"
 		    },
-		    "name": "GeneratorMV"
+		    "name": "GeneratorMVSecond"
 		},
 		"test": {
 		    "configuration": {
@@ -42,7 +42,7 @@
 			"shuffle": false,
 			"convertion": "polar"
 		    },
-		    "name": "GeneratorMV"
+		    "name": "GeneratorMVSecond"
 		}
 	    },
 	    "steps_per_epochs": null,
@@ -138,19 +138,19 @@
 	    }
 	],
 	"dataset": [
-		{
-		    "generator": {
-			"train": {
-			    "configuration": {
-				"set_file": "10_linear_0-9/train_set_all.txt"
-			    }
-			},
-			"validation": {
-			    "configuration": {
-				"set_file": "10_linear_0-9/val_set_all.txt"
-			    }
+	    {
+		"generator": {
+		    "train": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/train_set_all.txt"
+			}
+		    },
+		    "validation": {
+			"configuration": {
+			    "set_file": "10_linear_0-9/val_set_all.txt"
 			}
 		    }
 		}
+	    }
 	]
     }
