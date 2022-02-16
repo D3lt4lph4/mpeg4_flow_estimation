@@ -75,7 +75,10 @@ class TrainingConfigurationFactory(object):
                     if isinstance(set_file, list):
                         dataset_tag_name = set_file[1].split("/")[-2].split("_")[-1]
                     else:
-                        dataset_tag_name = set_file.split("/")[-2].split("_")[-1]
+                        if "/" in set_file:
+                            dataset_tag_name = set_file.split("/")[-2].split("_")[-1]
+                        else:
+                            dataset_tag_name = "alldata"
 
 
                     # Add the id of the training set to the sub-experiment name
