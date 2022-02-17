@@ -1,0 +1,174 @@
+{
+    "common": {
+        "fit_parameters": {
+            "epochs": 120,
+            "workers": 4,
+            "use_multiprocessing": false
+        },
+        "evaluator": {
+            "name": "Evaluator",
+            "configuration": {}
+        },
+        "displayer": {
+            "name": "Displayer",
+            "configuration": {}
+        },
+        "experiment_name": "DeepMotionCLF_Indus",
+        "weights": null,
+        "network": {
+            "name": "DeepMotionCLF_Indus",
+            "configuration": {
+                "use_bias": true
+            }
+        },
+        "generator": {
+            "train": {
+                "configuration": {
+                    "batch_size": 32,
+                    "transpose": [
+                        2,
+                        0,
+                        1,
+                        3
+                    ],
+                    "convertion": "polar"
+                },
+                "name": "GeneratorMV"
+            },
+            "validation": {
+                "configuration": {
+                    "batch_size": 32,
+                    "transpose": [
+                        2,
+                        0,
+                        1,
+                        3
+                    ],
+                    "convertion": "polar"
+                },
+                "name": "GeneratorMV"
+            },
+            "test": {
+                "configuration": {
+                    "batch_size": 32,
+                    "shuffle": false,
+                    "transpose": [
+                        2,
+                        0,
+                        1,
+                        3
+                    ],
+                    "convertion": "polar"
+                },
+                "name": "GeneratorMV"
+            }
+        },
+        "steps_per_epochs": null,
+        "validation_steps": null,
+        "optimizer": {
+            "name": "Adam",
+            "configuration": {}
+        },
+        "loss": {
+            "name": "MeanSquaredError",
+            "configuration": {}
+        },
+        "metrics": [
+            "mae"
+        ],
+        "callbacks": {
+            "runtime": [
+                {
+                    "name": "ModelCheckpoint"
+                },
+                {
+                    "name": "TensorBoard",
+                    "configuration": {
+                        "histogram_freq": 1,
+                        "write_graph": true,
+                        "profile_batch": 0
+                    }
+                }
+            ],
+            "static": [
+                {
+                    "name": "TerminateOnNaN",
+                    "configuration": {}
+                },
+                {
+                    "name": "EarlyStopping",
+                    "configuration": {
+                        "patience": 5,
+                        "min_delta": 0.01
+                    }
+                }
+            ]
+        }
+    },
+    "finetuning": [],
+    "experiment_variables": [
+        {
+            "sub_experiment_name": "base",
+            "generator": {
+                "train": {
+                    "configuration": {
+                        "normalize": {
+                            "T": {
+                                "mean": 0,
+                                "std": 1
+                            },
+                            "Q": {
+                                "mean": 0,
+                                "std": 1
+                            }
+                        }
+                    }
+                },
+                "validation": {
+                    "configuration": {
+                        "normalize": {
+                            "T": {
+                                "mean": 0,
+                                "std": 1
+                            },
+                            "Q": {
+                                "mean": 0,
+                                "std": 1
+                            }
+                        }
+                    }
+                },
+                "test": {
+                    "configuration": {
+                        "normalize": {
+                            "T": {
+                                "mean": 0,
+                                "std": 1
+                            },
+                            "Q": {
+                                "mean": 0,
+                                "std": 1
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    ],
+    "dataset": [
+        {
+            "generator": {
+                "train": {
+                    "configuration": {
+                        "set_file": "05_parsed_data/02_sets/02_day_split_41/02_E72.722Y/01_training_set.txt"
+                    }
+                },
+                "validation": {
+                    "configuration": {
+                        "set_file": "05_parsed_data/02_sets/02_day_split_41/02_E72.722Y/02_validation_set.txt"
+                    }
+                }
+            }
+        }
+    ]
+}
