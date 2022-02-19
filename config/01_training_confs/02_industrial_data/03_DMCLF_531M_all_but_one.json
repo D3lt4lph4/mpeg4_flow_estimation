@@ -160,12 +160,12 @@
             "generator": {
                 "train": {
                     "configuration": {
-                        "set_file": "05_parsed_data/02_sets/03_day_split_fuite_21/05_E73.531M/01_training_set.txt"
+                        "set_file": "05_parsed_data/02_sets/03_day_split_fuite_21/03_E73.531M/01_training_set.txt"
                     }
                 },
                 "validation": {
                     "configuration": {
-                        "set_file": "05_parsed_data/02_sets/03_day_split_fuite_21/05_E73.531M/02_validation_set.txt"
+                        "set_file": "05_parsed_data/02_sets/03_day_split_fuite_21/03_E73.531M/02_validation_set.txt"
                     }
                 }
             }
