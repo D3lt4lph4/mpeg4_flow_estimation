@@ -1,0 +1,29 @@
+{
+    "network": {
+        "name": "DeepMotionCLS_Indus",
+        "configuration": {
+            "use_bias": true,
+            "classes": 2
+        }
+    },
+
+    "generator": {
+        "configuration": {
+            "batch_size": 8,
+            "convertion": "polar",
+            "normalize": {
+                "T": {
+                    "mean": 0,
+                    "std": 1
+                },
+                "Q": {
+                    "mean": 0,
+                    "std": 1 
+                }
+            },
+            "set_file": "05_parsed_data/02_sets/06_hour_split_44/01_E72.433F/03_testing_set.txt"
+        },
+        "name": "GeneratorMVSecond"
+    },
+    "weights": null
+}
