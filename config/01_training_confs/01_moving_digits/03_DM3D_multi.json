@@ -141,12 +141,12 @@
             "generator": {
                 "train": {
                     "configuration": {
-                        "set_file": "12_linear_0-9_multi-lane/01_000/train_set.txt"
+                        "set_file": "03_linear_0-9_multi-lane/01_000/train_set.txt"
                     }
                 },
                 "validation": {
                     "configuration": {
-                        "set_file": "12_linear_0-9_multi-lane/01_000/val_set.txt"
+                        "set_file": "03_linear_0-9_multi-lane/01_000/val_set.txt"
                     }
                 }
             }

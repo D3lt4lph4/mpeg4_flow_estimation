@@ -142,12 +142,12 @@
             "generator": {
                 "train": {
                     "configuration": {
-                        "set_file": "11_linear_0-9_times/01_000/01_times_2/train_set.txt"
+                        "set_file": "02_linear_0-9_times/01_000/01_times_2/train_set.txt"
                     }
                 },
                 "validation": {
                     "configuration": {
-                        "set_file": "11_linear_0-9_times/01_000/01_times_2/val_set.txt"
+                        "set_file": "02_linear_0-9_times/01_000/01_times_2/val_set.txt"
                     }
                 }
             }

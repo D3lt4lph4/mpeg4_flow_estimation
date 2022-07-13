@@ -142,12 +142,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/03_180/train_set.txt"
+			    "set_file": "01_linear_0-9/03_180/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/03_180/val_set.txt"
+			    "set_file": "01_linear_0-9/03_180/val_set.txt"
 			}
 		    }
 		}

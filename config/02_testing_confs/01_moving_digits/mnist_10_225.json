@@ -21,7 +21,7 @@
             "generator": {
                 "test": {
                     "configuration": {
-                        "set_file": "10_linear_0-9/07_225/test_set.txt"
+                        "set_file": "01_linear_0-9/07_225/test_set.txt"
                     }
                 }
             }

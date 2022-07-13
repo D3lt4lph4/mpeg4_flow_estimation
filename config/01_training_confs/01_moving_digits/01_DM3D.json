@@ -142,12 +142,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/01_000/train_set.txt"
+			    "set_file": "01_linear_0-9/01_000/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/01_000/val_set.txt"
+			    "set_file": "01_linear_0-9/01_000/val_set.txt"
 			}
 		    }
 		}
@@ -156,12 +156,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/02_090/train_set.txt"
+			    "set_file": "01_linear_0-9/02_090/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/02_090/val_set.txt"
+			    "set_file": "01_linear_0-9/02_090/val_set.txt"
 			}
 		    }
 		}
@@ -170,12 +170,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/03_180/train_set.txt"
+			    "set_file": "01_linear_0-9/03_180/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/03_180/val_set.txt"
+			    "set_file": "01_linear_0-9/03_180/val_set.txt"
 			}
 		    }
 		}
@@ -184,12 +184,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/04_270/train_set.txt"
+			    "set_file": "01_linear_0-9/04_270/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/04_270/val_set.txt"
+			    "set_file": "01_linear_0-9/04_270/val_set.txt"
 			}
 		    }
 		}
@@ -198,12 +198,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/05_045/train_set.txt"
+			    "set_file": "01_linear_0-9/05_045/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/05_045/val_set.txt"
+			    "set_file": "01_linear_0-9/05_045/val_set.txt"
 			}
 		    }
 		}
@@ -212,12 +212,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/06_135/train_set.txt"
+			    "set_file": "01_linear_0-9/06_135/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/06_135/val_set.txt"
+			    "set_file": "01_linear_0-9/06_135/val_set.txt"
 			}
 		    }
 		}
@@ -226,12 +226,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/07_225/train_set.txt"
+			    "set_file": "01_linear_0-9/07_225/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/07_225/val_set.txt"
+			    "set_file": "01_linear_0-9/07_225/val_set.txt"
 			}
 		    }
 		}
@@ -240,12 +240,12 @@
 		"generator": {
 		    "train": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/08_315/train_set.txt"
+			    "set_file": "01_linear_0-9/08_315/train_set.txt"
 			}
 		    },
 		    "validation": {
 			"configuration": {
-			    "set_file": "10_linear_0-9/08_315/val_set.txt"
+			    "set_file": "01_linear_0-9/08_315/val_set.txt"
 			}
 		    }
 		}
