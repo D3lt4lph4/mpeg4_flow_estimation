@@ -3,6 +3,8 @@ import collections.abc
 
 from copy import deepcopy
 
+from os.path import join, basename
+
 
 def update(a, b):
     """ Updates the values in dictionnary a with the values in dictionnary b.
@@ -73,7 +75,10 @@ class TrainingConfigurationFactory(object):
                     if isinstance(set_file, list):
                         dataset_tag_name = set_file[1].split("/")[-2].split("_")[-1]
                     else:
-                        dataset_tag_name = set_file.split("/")[-2].split("_")[-1]
+                        if "/" in set_file:
+                            dataset_tag_name = set_file.split("/")[-2].split("_")[-1]
+                        else:
+                            dataset_tag_name = "alldata"
 
 
                     # Add the id of the training set to the sub-experiment name
@@ -82,3 +87,49 @@ class TrainingConfigurationFactory(object):
 
                     # Yield the new configuration
                     yield deepcopy(parameters)
+
+
+class TestingConfigurationFactory(object):
+
+    def __init__(self, experiment_directory, testing_configuration):
+        """ Factory to generate the configuration for testing.
+
+        Will read the saved configuration of the experiment and test against the provided configuration.
+
+        # Arguments:
+            - experiment_directory: The experiment directory (containing the config/checkpoints/log dirs)
+            - testing_configuration: The configuration file to use for testing.
+        """
+        with open(testing_configuration, "r") as json_file:
+            dictionnary = json.load(json_file)
+
+        self.iterable_parameters = iter(dictionnary["iterable"])
+
+        with open(join(experiment_directory, "config/config.json"), "r")as json_file:
+            self.main_config = json.load(json_file)
+
+        self.main_config = update(self.main_config, dictionnary["common"])
+
+        self.main_config["weights"] = join(
+            experiment_directory, "checkpoints", "best_weights.h5")
+
+        # Get the id of the experiment
+        self.experiment_id = "_".join(
+            basename(experiment_directory).split("_")[:])
+
+    def __iter__(self):
+        return self
+
+    def __next__(self):
+        next_iterable = next(self.iterable_parameters)
+
+        parameters = update(deepcopy(self.main_config), next_iterable)
+
+        set_file = parameters["generator"]["test"]["configuration"]["set_file"]
+
+        if len(set_file.split("/")) > 2:
+            parameters["dataset_id"] = set_file.split("/")[-2].split("_")[-1]
+        else:
+            parameters["dataset_id"] = set_file.split("/")[-1].split("_")[-1]
+
+        return parameters

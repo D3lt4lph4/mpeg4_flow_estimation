@@ -1,0 +1,30 @@
+{
+    "common": {
+        "generator": {
+            "test": {
+                "configuration": {}
+            }
+        },
+        "evaluator": {
+            "name": "Evaluator",
+            "configuration": {}
+        },
+        "network": {
+            "configuration": {
+                "mode": "evaluation"
+            }
+        }
+    },
+    "iterable": [
+        {
+            "dataset_name": "03_E73.268Y",
+            "generator": {
+                "test": {
+                    "configuration": {
+                        "set_file": "05_parsed_data/02_sets/06_hour_split_44/03_E73.268Y/03_testing_set.txt"
+                    }
+                }
+            }
+        }
+    ]
+}

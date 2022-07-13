@@ -1,0 +1,30 @@
+{
+    "common": {
+        "generator": {
+            "test": {
+                "configuration": {}
+            }
+        },
+        "evaluator": {
+            "name": "Evaluator",
+            "configuration": {}
+        },
+        "network": {
+            "configuration": {
+                "mode": "evaluation"
+            }
+        }
+    },
+    "iterable": [
+        {
+            "dataset_name": "05_E73.531M",
+            "generator": {
+                "test": {
+                    "configuration": {
+                        "set_file": "05_parsed_data/02_sets/06_hour_split_44/05_E73.531M/03_testing_set.txt"
+                    }
+                }
+            }
+        }
+    ]
+}

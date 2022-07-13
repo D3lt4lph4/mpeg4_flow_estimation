@@ -1,0 +1,30 @@
+{
+    "common": {
+        "generator": {
+            "test": {
+                "configuration": {}
+            }
+        },
+        "evaluator": {
+            "name": "Evaluator",
+            "configuration": {}
+        },
+        "network": {
+            "configuration":{
+                "mode": "evaluation"
+            }
+        }
+    },
+    "iterable": [
+        {
+            "dataset_name": "07_225",
+            "generator": {
+                "test": {
+                    "configuration": {
+                        "set_file": "10_linear_0-9/07_225/test_set.txt"
+                    }
+                }
+            }
+        }
+    ]
+}
