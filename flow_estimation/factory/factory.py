@@ -126,6 +126,10 @@ class TestingConfigurationFactory(object):
         parameters = update(deepcopy(self.main_config), next_iterable)
 
         set_file = parameters["generator"]["test"]["configuration"]["set_file"]
-        parameters["dataset_id"] = set_file.split("/")[-2].split("_")[-1]
+
+        if len(set_file.split("/")) > 2:
+            parameters["dataset_id"] = set_file.split("/")[-2].split("_")[-1]
+        else:
+            parameters["dataset_id"] = set_file.split("/")[-1].split("_")[-1]
 
         return parameters

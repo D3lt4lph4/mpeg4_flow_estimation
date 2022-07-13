@@ -1,5 +1,6 @@
 from os import makedirs
 from os.path import join, exists
+from statistics import mean
 
 import numpy as np
 
@@ -9,7 +10,7 @@ from sklearn.metrics import r2_score
 
 from .helpers import extract_sample_from_matrix, extract_sample_from_matrix_v2
 from .helpers import save_histogram, save_2d_distribution
-from .helpers import save_hexbin, save_plot, save_error_plot
+from .helpers import save_hexbin, save_plot, save_error_plot, save_time_plot
 
 
 from flow_estimation.generators import GeneratorMVSecond, BaseGenerator
@@ -42,6 +43,7 @@ class Evaluator(object):
         for key in generators:
             if key in ["training", "validation"]:
                 output_key_directory = join(output_directory, key)
+                continue
             else:
                 output_key_directory = join(output_directory, id)
 
@@ -255,7 +257,9 @@ class Evaluator(object):
             # These coefficients are global
             r = np.corrcoef(y_true.T, y_pred.T)
 
-            mae = np.mean(np.abs(y_pred - y_true))
+            abs_errors = np.abs(y_pred - y_true)
+
+            mae = np.mean(abs_errors)
 
             # This coefficient is not
             r2_global = 0
@@ -300,6 +304,7 @@ class Evaluator(object):
 
             y_true = np.array(generator_data["data_output"][key]["real"])
             y_pred = np.array(generator_data["data_output"][key]["predicted"])
+            time_segments = generator_data["time_segments"]
 
             # Create the output directory
             output_directory_key = join(output_directory, key_dict[key])
@@ -311,6 +316,10 @@ class Evaluator(object):
 
             # Then the "normal" map of the prediction vs real data
             save_plot(y_true, y_pred, output_directory_key, key, experiment_id)
+
+            # Then plot the data over time
+            save_time_plot(y_true, y_pred, time_segments, output_directory,
+                           key, experiment_id)
 
             # Then plot the error graph
             save_error_plot(y_true, y_pred, output_directory_key, key,

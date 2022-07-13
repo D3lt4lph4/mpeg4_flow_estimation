@@ -1,11 +1,13 @@
 from random import randint
 
 from os.path import join
+from time import time
 
 from typing import Dict
 
 import matplotlib.pyplot as plt
 import matplotlib.cm as cm
+from matplotlib.ticker import MaxNLocator
 
 import numpy as np
 
@@ -15,17 +17,17 @@ from sklearn.metrics import r2_score
 from scipy.interpolate import interp1d
 
 
-def save_tsne(xs_t, xt_t, xs_t_label, xt_t_label, title, output_dir, n_labels = None):
+def save_tsne(xs_t, xt_t, xs_t_label, xt_t_label, title, output_dir, n_labels=None):
 
-    xs = xs_t#[:2500]
-    xt = xt_t#[:2500]
-    xs_label = xs_t_label#[:2500]
-    xt_label = xt_t_label#[:2500]    
+    xs = xs_t  # [:2500]
+    xt = xt_t  # [:2500]
+    xs_label = xs_t_label  # [:2500]
+    xt_label = xt_t_label  # [:2500]
 
     # Combine the extracted representations
     combined_embedded = np.vstack([xs, xt])
     combined_labels = np.vstack([xs_label, xt_label])
-    
+
     # Get the index of the last source point
     s_index = len(xs_label)
     t_index = len(xt_label)
@@ -34,9 +36,9 @@ def save_tsne(xs_t, xt_t, xs_t_label, xt_t_label, title, output_dir, n_labels = 
 
         unique_labels = np.unique(list(map(int, combined_labels)))
 
-        colors = cm.brg(np.linspace(0,1,max(unique_labels)+1))
+        colors = cm.brg(np.linspace(0, 1, max(unique_labels)+1))
     else:
-        colors = cm.brg(np.linspace(0,1,n_labels))
+        colors = cm.brg(np.linspace(0, 1, n_labels))
 
     # Create the t-sne module
     tsne = TSNE(perplexity=30, n_components=2, init='pca', n_iter=3000)
@@ -50,8 +52,8 @@ def save_tsne(xs_t, xt_t, xs_t_label, xt_t_label, title, output_dir, n_labels = 
     # # Get the index of the last source point
     # s_index = len(xs_label)
 
-    source_colors = [colors[int(xs_label[i,0])] for i in range(s_index)]
-    target_colors = [colors[int(xt_label[i,0])] for i in range(t_index)]
+    source_colors = [colors[int(xs_label[i, 0])] for i in range(s_index)]
+    target_colors = [colors[int(xt_label[i, 0])] for i in range(t_index)]
 
     # Print the points on the figure
     plt.scatter(source_only_tsne[:s_index, 0],
@@ -211,7 +213,7 @@ def save_histogram(X,
 
 def save_2d_distribution(X: object, key_indexes: Dict, output_directory: str,
                          id: str,
-                         data_type:str = "cartesian"):
+                         data_type: str = "cartesian"):
     """ Plot the 2d distribution of the data.
 
     # Arguments:
@@ -226,9 +228,12 @@ def save_2d_distribution(X: object, key_indexes: Dict, output_directory: str,
     elif data_type == 'polar':
         save_polar_2d_distribution(X, key_indexes, output_directory, id)
     elif data_type == 'polar_module':
-        raise RuntimeError("Plot saving not implemented for polar module coordinates.")
+        raise RuntimeError(
+            "Plot saving not implemented for polar module coordinates.")
     else:
-        raise RuntimeError("The data type {} is not supported.".format(data_type))
+        raise RuntimeError(
+            "The data type {} is not supported.".format(data_type))
+
 
 def save_cartesian_2d_distribution(X: object, key_indexes: Dict, output_directory: str, id: str):
     """ Plot the 2d distribution of the data for cartesian representation .
@@ -265,6 +270,7 @@ def save_cartesian_2d_distribution(X: object, key_indexes: Dict, output_director
         plt.clf()
     plt.close()
 
+
 def save_polar_2d_distribution(X: object, key_indexes: Dict, output_directory: str, id: str):
     """ Plot the 2d distribution of the data for polar representation .
 
@@ -285,14 +291,13 @@ def save_polar_2d_distribution(X: object, key_indexes: Dict, output_directory: s
 
         # define binning
         rbins = np.linspace(0, max(20, np.max(y).astype(np.int)), 30)
-        abins = np.linspace(0,2*np.pi, 60)
+        abins = np.linspace(0, 2*np.pi, 60)
 
-        #calculate histogram
+        # calculate histogram
         hist, _, _ = np.histogram2d(y, x, bins=(abins, rbins))
         A, R = np.meshgrid(abins, rbins)
 
         # hist[hist == 0] = 1
-
 
         img = ax.pcolormesh(A, R, np.log(hist.T), cmap="plasma")
         fig.colorbar(img)
@@ -305,9 +310,10 @@ def save_polar_2d_distribution(X: object, key_indexes: Dict, output_directory: s
         plt.clf()
     plt.close()
 
+
 def save_hexbin(y_true, y_pred, output_directory, id, value_name):
     """ Plot and save the hexbin heatmap of the real vs predicted values.
-    
+
     # Arguments:
         - y_true: The true values of the data.
         - y_pred: The predicted values of the data.
@@ -345,10 +351,18 @@ def save_plot(y_true, y_pred, output_directory, value_name, id):
 
     """
     fig = plt.figure()
+    ax = fig.gca()
 
-    plt.title("{} vs Real {}".format(value_name, value_name))
-    plt.xlabel("Real {}".format(value_name))
-    plt.ylabel("{}".format(value_name))
+    plt.xlim([-1, 18])
+    plt.ylim([-1, 18])
+
+    plt.yticks(fontsize=14)
+    plt.xticks(fontsize=14)
+
+    plt.title("Predicted {} vs Real {}".format(
+        value_name, value_name), fontsize=22)
+    plt.xlabel("Real {}".format(value_name), fontsize=17)
+    plt.ylabel("Predicted {}".format(value_name), fontsize=17)
 
     # Plot the predictions
     plt.scatter(y_true, y_pred)
@@ -378,9 +392,12 @@ def save_plot(y_true, y_pred, output_directory, value_name, id):
     plt.xlim(x_range)
     plt.ylim(y_range)
 
+    ax.xaxis.set_major_locator(MaxNLocator(integer=True))
+    ax.yaxis.set_major_locator(MaxNLocator(integer=True))
+
     # Save the figure
     plt.savefig(
-        join(output_directory, "{}_{}_scatter.png".format(id, value_name)))
+        join(output_directory, "{}_{}_scatter.png".format(id, value_name)), bbox_inches="tight")
     plt.close()
 
 
@@ -397,8 +414,16 @@ def save_time_plot(y_true, y_pred, segment_index, output_directory, value_name,
         - output_dir: The output directory for the plot.
     """
     # Prepare the figure
-    fig = plt.figure()
-    fig.set_size_inches(int(len(y_true)) // 10, 15)
+    fig = plt.figure(figsize=(9,3))
+
+    plt.yticks(fontsize=14)
+    plt.xticks(fontsize=14)
+
+    number_of_point = 250
+    pred_size = len(y_true)
+    step = pred_size // number_of_point
+
+    # fig.set_size_inches(15, 5)
 
     # Computing the MAE
     mae = np.mean(np.abs(y_true - y_pred))
@@ -420,53 +445,82 @@ def save_time_plot(y_true, y_pred, segment_index, output_directory, value_name,
 
     # Create the separators for the time segments and sort the data
     separators = [0]
+    separators_2 = [0]
     y_pred_sorted = np.zeros_like(y_pred)
     y_true_sorted = np.zeros_like(y_true)
 
     for time_key in time_sorted_segments_key:
         indexes = segment_index[time_key]
         separators.append(len(indexes) + separators[-1])
+        separators_2.append(len(indexes) // step + separators_2[-1])
         y_pred_sorted[separators[-2]:separators[-1], :] = y_pred[indexes]
         y_true_sorted[separators[-2]:separators[-1], :] = y_true[indexes]
 
-    max_range = int(np.max(np.maximum(y_pred_sorted, y_true_sorted)) + 20)
+    # max_range = int(np.max(np.maximum(y_pred_sorted, y_true_sorted)) + 20)
+    max_range = 15
 
     # Add the vertical separators
-    for i, sep in enumerate(separators[1:-1]):
+    for i, sep in enumerate(separators_2[1:-1]):
         # Put the text in the middle of the two separators
-        text_position = separators[i] + (sep - separators[i]) / 2
+        text_position = separators_2[i] + (sep - separators_2[i]) / 2
+
+        hour = int(time_sorted_segments_key[i].split(":")[1])
+
+        if hour == 8:
+            time_value = "8-10 am"
+        elif hour == 12:
+            time_value = "noon - 1 pm"
+        elif hour == 18:
+            time_value = "6-8 pm"
+        elif hour == 22:
+            time_value = "10-11 pm"
+
+        # time_value = ":".join(time_sorted_segments_key[i].split(":")[1:])
 
         plt.vlines(x=sep, ymin=-10, ymax=100, linestyles="dashed")
         plt.text(text_position,
-                 max_range - 5,
-                 "{}, R2 : {}".format(time_sorted_segments_key[i],
-                                      r2_dict[time_sorted_segments_key[i]]),
-                 ha='center')
+                 max_range - 1.5,
+                 "{}".format(time_value),
+                 ha='center',
+                 fontsize=12)
     else:
-        text_position = separators[-2] + (separators[-1] - separators[-2]) / 2
+        text_position = separators_2[-2] + \
+            (separators_2[-1] - separators_2[-2]) / 2
+        # time_value = ":".join(time_sorted_segments_key[-1].split(":")[1:])
+        hour = int(time_sorted_segments_key[-1].split(":")[1])
+
+        if hour == 8:
+            time_value = "8-10 am"
+        elif hour == 12:
+            time_value = "noon - 1 pm"
+        elif hour == 18:
+            time_value = "6-8 pm"
+        elif hour == 22:
+            time_value = "10-11 pm"
         plt.text(text_position,
-                 max_range - 5,
-                 "{}, R2 : {}".format(time_sorted_segments_key[-1],
-                                      r2_dict[time_sorted_segments_key[-1]]),
-                 ha='center')
+                 max_range - 1.5,
+                 "{}".format(time_value),
+                 ha='center',
+                 fontsize=12)
 
     # add the data
-    plt.plot(y_pred_sorted, label="Predicted")
-    plt.plot(y_true_sorted, label="Real")
-    plt.legend(loc="upper right")
+    plt.plot(y_pred_sorted[::step], label="Predicted")
+    plt.plot(y_true_sorted[::step], label="Real")
+    plt.legend(loc="upper left", fontsize=12)
 
     plt.xlabel('Time', fontsize=18)
-    plt.ylabel('{} value'.format(value_name), fontsize=16)
+    plt.ylabel('{} value'.format(value_name), fontsize=18)
 
+    plt.xlim([0, len(y_pred_sorted[::step])])
     plt.ylim((0, max_range))
 
-    fig.suptitle(
-        "{} Real/Predicted over time, MAE = {:.3f}, R = {:.3f}, R2 = {:.3f}".
-        format(value_name, mae, r[0, 1], global_r2))
+    # fig.suptitle(
+    #     "{} Real/Predicted over time, MAE = {:.3f}, R = {:.3f}, R2 = {:.3f}".
+    #     format(value_name, mae, r[0, 1], global_r2))
 
     # Save the figure
     plt.savefig(
-        join(output_directory, "{}_{}_over_time.png".format(id, value_name)))
+        join(output_directory, "{}_{}_over_time.png".format(id, value_name)), bbox_inches='tight')
 
     # Closing current plot to avoid errors later
     plt.close()
