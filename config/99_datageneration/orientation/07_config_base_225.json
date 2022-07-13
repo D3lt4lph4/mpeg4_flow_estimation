@@ -1,0 +1,33 @@
+{
+    "lanes": [
+        {
+            "starting_position": [
+                [
+                    239,
+                    240
+                ],
+                [
+                    -40,
+                    -39
+                ]
+            ],
+            "ending_position": [
+                [
+                    -40,
+                    -39
+                ],
+                [
+                    239,
+                    240
+                ]
+            ],
+            "speed": [
+                120,
+                121
+            ],
+            "total_max_objects": 30,
+            "overlap": false,
+            "update_ratio":[0.02]
+        }
+    ]
+}

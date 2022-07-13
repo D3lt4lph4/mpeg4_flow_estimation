@@ -1,0 +1,62 @@
+{
+    "lanes": [
+        {
+            "starting_position": [
+                [
+                    -40,
+                    -39
+                ],
+                [
+                    50,
+                    51
+                ]
+            ],
+            "ending_position": [
+                [
+                    239,
+                    240
+                ],
+                [
+                    50,
+                    51
+                ]
+            ],
+            "speed": [
+                120,
+                121
+            ],
+            "total_max_objects": 20,
+            "overlap": false,
+            "update_ratio": [0.01]
+        },
+        {
+            "starting_position": [
+                [
+                    -40,
+                    -39
+                ],
+                [
+                    150,
+                    151
+                ]
+            ],
+            "ending_position": [
+                [
+                    239,
+                    240
+                ],
+                [
+                    150,
+                    151
+                ]
+            ],
+            "speed": [
+                120,
+                121
+            ],
+            "total_max_objects": 20,
+            "overlap": false,
+            "update_ratio": [0.01]
+        }
+    ]
+}
