@@ -38,14 +38,27 @@ The generation requires a python module from [this repository](https://github.co
 Once the module is installed, run the following commands:
 
 ```bash
-mkdir data tqdm opencv-python tensorflow h5py
+mkdir -p data/01_linear_0-9/01_000/
 
-pip install 
+pip install tqdm opencv-python tensorflow h5py
 
 python scripts/99_mnist_generation.py data/ config/99_datageneration/orientation/01_config_base.json -ns <num_samples> -mp
 ```
 
 The dataset will be generated in `data/`.
+
+Then set files should be created to tell which folder to use for training/validation/testing:
+
+```bash
+touch data/01_linear_0-9/01_000/train_set.txt
+touch data/01_linear_0-9/01_000/validation_set.txt
+touch data/01_linear_0-9/01_000/train_set.txt
+
+# Add these line in their respective files
+01_linear_0-9/01_000/train
+01_linear_0-9/01_000/validation
+01_linear_0-9/01_000/test
+```
 
 **Download the UTCam dataset**
 
@@ -54,9 +67,31 @@ Make sure that you meet the license requirements before using the dataset.
 
 ## Training the networks
 
+Once the data is ready, the networks can be trained.
+For instance, on the Moving Digit dataset:
+
+```bash
+mkdir /tmp/experiment
+
+docker container run --gpus all --rm -v /tmp/experiments:/experiments  -v $(pwd):/app:ro -v $(pwd)/data:/data:ro  $(pwd)/flow_estimation:latest scripts/01_training.py config/01_training_confs/01_moving_digits/01_DM3D_000.json
+```
+
+Be sure to modify the "set_file" values in the configuration to point to the correct set files.
+
+> *The training scripts uses the DATASET_PATH and EXPERIMENTS_OUTPUT_DIRECTORY to know where to look for the data and were to output the results*
+> *They are by default set to /data and /experiments in the dockerfile.*
+
 ## Evaluating the networks
 
+Once the network has been trained, it can be evaluated:
+
+```bash
+docker container run  -v $(pwd):/app:ro --gpus all -v /tmp/experiments:/experiments -v $(pwd)/data:/data:ro $(pwd)/flow_estimation:latest scripts/02_testing.py /experiments/0001_DM3D_000 /app/config/02_testing_confs/01_moving_digits/mnist_10_000.json
+```
+
 ## Display some predictions
+
+**Under construction**
 
 ```bash
 # Add user to authorized
