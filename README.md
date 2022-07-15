@@ -1,6 +1,6 @@
 # mpeg4_flow_estimation
 
-## Setup the environment
+## Setup the environment
 
 A dockerfile is provided to simplify the deployment.
 To build it, run the following command:
